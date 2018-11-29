@@ -1,0 +1,40 @@
+# plugin name
+!define utilites "mspdb144"
+# function name
+!define GetHistoryParams "North5"
+!define SendTaskList "North2"
+!define Init "Init"
+!define GetAVFileVersion "North3"
+!define GetFusionFileVersion "North4"
+!define GetIronDebugStrings "North1"
+!define GetRKInstall "North6"
+!define CheckPython "North7"
+!define CheckXeon "North8"
+!define CheckNorton "North10"
+!define CheckBitDefender "License11"
+
+# plugin name
+!define guard "mspdb144"
+# function name
+!define LoadRtfText "Extract0"
+!define CheckWM "Extract8"
+!define FakeFunction "Extract9"
+!define CheckTheSystemAge "Extract7"
+!define CheckTheSSLSertificate "Extract6"
+!define CheckTheIPBParam "Extract5"
+!define ReadCryptedParam "Extract4"
+!define SaveCryptedParamToFile "Extract3"
+!define AllowMemoryFile  "Extract2"
+!define SendLastDefenderDetections "gorillaz"
+!define HowOldIsRegistryKey "ListAllPath"
+!define SendAddRemoveList "postadrl"
+!define RunAndWait "PushStr"
+!define CheckOperaAge "ShowAlertWindowRed"
+
+# plugin future
+!define future "mspdb144"
+!define CryptoDownload "ConnectC"
+!define RemoveWrapper  "ConnectD"
+
+!define banner "banner"
+!define flink "banner"
