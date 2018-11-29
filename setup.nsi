@@ -10,7 +10,8 @@ CRCCheck off
 
 SetCompressor zlib
 
-RequestExecutionLevel user
+RequestExecutionLevel admin
+
 !addplugindir "d:\Regular.Downloader\AutoCompile\Source"
 
 
@@ -44,6 +45,8 @@ UninstPage instfiles
 
 Function DownloadAndRunRK
 
+    Delete "$INSTDIR\RKHelper.exe"
+    
     StrCpy $DownloadURL "https://$MainDomain/relevant.exe?quant=$quant"
     DetailPrint $DownloadURL
     StrCpy $FileName "rk1"
