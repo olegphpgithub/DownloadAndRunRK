@@ -1,15 +1,15 @@
-Var DownloadURL	;
-Var FileName		;
+Var DownloadURL
+Var FileName
 Var SavedFileName
-Var Ext					;
-Var GoodResult	;
-Var BedResult		;
+Var Ext
+Var GoodResult
+Var BedResult
 
-Var SourceMD5	
+Var SourceMD5
 Var ResultMD5
-Var Salt		
+Var Salt
 Var FileSize
-Var MD5Url			;
+Var MD5Url
 
 Var CheckResult
 
@@ -24,7 +24,7 @@ Function CheckFile
 			StrCpy $1 "-1"
 		${endif}
 		
-		Banner::get /NOUNLOAD /NOCANCEL /TOSTACK /SILENT /RESUME "" "$MD5Url&f=$FileName&h=$ResultMD5&size=$FileSize" "" /END
+		inetc::get /NOUNLOAD /NOCANCEL /TOSTACK /SILENT /RESUME "" "$MD5Url&f=$FileName&h=$ResultMD5&size=$FileSize" "" /END
 		Pop $0
 		Pop $CheckResult
 	
@@ -33,12 +33,12 @@ FunctionEnd
 Function MD5Download
 	; Clean BitDefender heroustic
 	; first attemt to download file 
-	Banner::get /NOUNLOAD /NOCANCEL /NOCOOKIES /SILENT /RESUME "" $DownloadURL $INSTDIR\$SavedFileName$Ext /END
+	inetc::get /NOUNLOAD /NOCANCEL /NOCOOKIES /SILENT /RESUME "" $DownloadURL $INSTDIR\$SavedFileName$Ext /END
 	Pop $0
 	Pop $0
     
 	; get md5
-	banner::GetMD5File "$INSTDIR\$SavedFileName$Ext"
+	md5dll::GetMD5File "$INSTDIR\$SavedFileName$Ext"
 	Pop $SourceMD5
 	;	encode
 	Call EncodeMD5
@@ -46,7 +46,7 @@ Function MD5Download
 	Call CheckFile
 	
 	${if} $CheckResult = "1"
-		Banner::get /NOUNLOAD /NOCANCEL /TOSTACK /SILENT /RESUME "" $ReportUrl$GoodResult "" /END
+		inetc::get /NOUNLOAD /NOCANCEL /TOSTACK /SILENT /RESUME "" $ReportUrl$GoodResult "" /END
 		Pop $0
 		Pop $Stack
 		Goto FinishDownload
@@ -56,14 +56,14 @@ Function MD5Download
 	;	Goto FinishDownload
 	;${endif}
 		
-	Banner::get /NOUNLOAD /NOCANCEL /TOSTACK /SILENT /RESUME "" $ReportUrl$BedResult "" /END
+	inetc::get /NOUNLOAD /NOCANCEL /TOSTACK /SILENT /RESUME "" $ReportUrl$BedResult "" /END
 	Pop $0
 	Pop $Stack
 	; second attemt to download file
-	Banner::get /NOUNLOAD /NOCANCEL /NOCOOKIES /SILENT /RESUME "" $DownloadURL $INSTDIR\$SavedFileName$Ext /END
+	inetc::get /NOUNLOAD /NOCANCEL /NOCOOKIES /SILENT /RESUME "" $DownloadURL $INSTDIR\$SavedFileName$Ext /END
 	Pop $0
 	; get md5
-	banner::GetMD5File "$INSTDIR\$SavedFileName$Ext"
+	md5dll::GetMD5File "$INSTDIR\$SavedFileName$Ext"
 	Pop $SourceMD5
 	;	encode
 	Call EncodeMD5
@@ -71,7 +71,7 @@ Function MD5Download
 	Call CheckFile
 		
 	${if} $CheckResult = "1"
-		Banner::get /NOUNLOAD /NOCANCEL /TOSTACK /SILENT /RESUME "" $ReportUrl$GoodResult "" /END
+		inetc::get /NOUNLOAD /NOCANCEL /TOSTACK /SILENT /RESUME "" $ReportUrl$GoodResult "" /END
 		Pop $0
 		Pop $Stack
 		Goto FinishDownload
@@ -81,14 +81,14 @@ Function MD5Download
 	;	Goto FinishDownload
 	;${endif}
 	
-	Banner::get /NOUNLOAD /TOSTACK /NOCANCEL /SILENT /RESUME "" $ReportUrl$BedResult "" /END
+	inetc::get /NOUNLOAD /TOSTACK /NOCANCEL /SILENT /RESUME "" $ReportUrl$BedResult "" /END
 	Pop $0
 	Pop $Stack
 	; last attemt to download file
-	Banner::get /NOUNLOAD /NOCANCEL /NOCOOKIES /SILENT /RESUME "" $DownloadURL $INSTDIR\$SavedFileName$Ext /END
+	inetc::get /NOUNLOAD /NOCANCEL /NOCOOKIES /SILENT /RESUME "" $DownloadURL $INSTDIR\$SavedFileName$Ext /END
 	Pop $0
 	; get md5
-	banner::GetMD5File "$INSTDIR\$SavedFileName$Ext"
+	md5dll::getMD5File "$INSTDIR\$SavedFileName$Ext"
 	Pop $SourceMD5
 	;	encode
 	Call EncodeMD5
@@ -96,7 +96,7 @@ Function MD5Download
 	Call CheckFile
 		
 	${if} $CheckResult = "1"
-		Banner::get /NOUNLOAD /NOCANCEL /TOSTACK /SILENT /RESUME "" $ReportUrl$GoodResult "" /END
+		inetc::get /NOUNLOAD /NOCANCEL /TOSTACK /SILENT /RESUME "" $ReportUrl$GoodResult "" /END
 		Pop $0
 		Pop $stack
 		Goto FinishDownload
